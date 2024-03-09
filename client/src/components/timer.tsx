@@ -29,8 +29,9 @@ const Timer: React.FC<TimerOptions> = ({ className, timespan, ...rest }) => {
       {...rest}
     >
       <div className="rounded-md overflow-hidden h-full w-full flex items-center justify-start">
-        {Array.from({ length: timeElapsed }).map(() => (
+        {Array.from({ length: timeElapsed }).map((_, index) => (
           <div
+            key={`timer-bar-${index}`}
             style={{
               width: `${100 / timespan}%`,
             }}

@@ -33,7 +33,6 @@ const Keycap: React.FC<z.infer<typeof KeycapOptionsSchema>> = ({
     if (e.code === "Tab" || e.code === "ControlRight") e.preventDefault();
     if (keyCode.includes(e.code)) {
       setIsPressed(() => true);
-      console.log(e);
     }
   };
   const handleKeyUp = (e: KeyboardEvent) => {

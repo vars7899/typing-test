@@ -22,6 +22,9 @@ const config: Config = {
       gridColumn: {
         "span-25": "span 25 / span 25",
       },
+      fontFamily: {
+        manjari: ["var(--font-manjari)"],
+      },
     },
   },
   plugins: [],
