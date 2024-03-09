@@ -3,7 +3,7 @@ import Keycap from "./Keycap";
 
 export default function Keyboard() {
   return (
-    <div className="flex items-center justify-center my-8">
+    <div className="">
       <div className="grid grid-cols-[repeat(48,_15px)] grid-flow-row gap-2">
         <Keycap
           centerLabel="`"

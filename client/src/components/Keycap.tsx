@@ -66,7 +66,7 @@ const Keycap: React.FC<z.infer<typeof KeycapOptionsSchema>> = ({
         {centerLabel}
       </p>
       {center && (
-        <p className="text-white uppercase absolute not-italic left-[24px] top-[16px]">
+        <p className="text-white uppercase absolute not-italic left-[24px] top-[13px]">
           {center}
         </p>
       )}
