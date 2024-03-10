@@ -73,6 +73,7 @@ const TextAssignment: React.FC<TextAssignmentOptions> = ({ content }) => {
           <span
             key={`character-${index}`}
             className={cn(
+              character === " " && "px-2",
               index === cursorPosition && "bg-green-700 animate-pulse",
               wrongKey.includes(index) &&
                 index !== cursorPosition &&
