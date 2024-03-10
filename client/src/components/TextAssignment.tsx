@@ -1,5 +1,6 @@
 "use client";
 
+import { useWPM } from "@/hooks";
 import { cn } from "@/utils/utils";
 import React, { ChangeEvent, FormEventHandler } from "react";
 
@@ -8,12 +9,23 @@ interface TextAssignmentOptions extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 const TextAssignment: React.FC<TextAssignmentOptions> = ({ content }) => {
+  const {
+    startTypingTimer,
+    endTypingTimer,
+    startTime,
+    endTime,
+    grossWpm,
+    netWpm,
+    addKeyStrokeError,
+    accuracy,
+  } = useWPM(content);
   const inputRef = React.useRef<null | HTMLInputElement>(null);
   const [textTyped, setTextTyped] = React.useState<string>("");
   const [cursorPosition, setCursorPosition] = React.useState<number>(0);
   const [wrongKey, setWrongKey] = React.useState<Array<number>>([]);
 
   const handleUserInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    startTypingTimer();
     setTextTyped(() => e.target.value);
 
     if (e.target.value.slice(-1) !== content[cursorPosition]) {
@@ -22,19 +34,24 @@ const TextAssignment: React.FC<TextAssignmentOptions> = ({ content }) => {
           ? prev
           : [...prev, e.target.value.length - 1]
       );
+      addKeyStrokeError(e.target.value.length - 1);
       setTextTyped((prev) => prev.slice(0, -1));
       return;
     }
     setCursorPosition((prev) => prev + 1);
   };
 
-  console.log(wrongKey);
-
   React.useEffect(() => {
     if (inputRef) {
       inputRef.current?.focus();
     }
   }, [content]);
+
+  React.useEffect(() => {
+    if (textTyped.length && cursorPosition === content.length) {
+      endTypingTimer();
+    }
+  }, [textTyped, cursorPosition, content.length]);
 
   const ignoreKey = (e: KeyboardEvent, keyCode?: string) => {
     if (e.code === keyCode) e.preventDefault();
@@ -46,6 +63,8 @@ const TextAssignment: React.FC<TextAssignmentOptions> = ({ content }) => {
       window.removeEventListener("keydown", ignoreKey);
     };
   });
+
+  console.log(accuracy, netWpm, grossWpm);
 
   return (
     <div>

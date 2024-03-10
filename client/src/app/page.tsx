@@ -2,7 +2,8 @@ import TextAssignment from "@/components/TextAssignment";
 import Keyboard from "@/components/keyboard";
 import Timer from "@/components/timer";
 
-const SampleTextAssignment = "This is sample test";
+const SampleTextAssignment =
+  "Type the paragraphs as fast as you can, but remember that accuracy is just as important as speed.";
 
 export default function Home() {
   return (
